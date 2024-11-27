@@ -1,4 +1,4 @@
-package com.magan_korhaz.private_hospital.model;
+package com.magan_korhaz.private_hospital;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
