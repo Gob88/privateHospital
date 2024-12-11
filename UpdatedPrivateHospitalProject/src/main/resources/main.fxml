@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.magan_korhaz.private_hospital.MainController">
+    <top>
+        <ComboBox fx:id="doctorBox" promptText="Válasszon orvost" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <TableView fx:id="appointmentTable">
+            <columns>
+                <TableColumn fx:id="dateColumn" text="Dátum" />
+                <TableColumn fx:id="timeColumn" text="Időpont" />
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <Button text="Időpontok betöltése" onAction="#loadAppointments" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>
