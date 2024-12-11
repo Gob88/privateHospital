@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.magan_korhaz.private_hospital.MainController">
+    <left>
+        <VBox spacing="10" alignment="CENTER">
+            <Button text="Services"/>
+            <Button text="About Us"/>
+            <Button text="Contact"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Select Specialization:"/>
+            <ComboBox fx:id="specializationComboBox"/>
+            <Label text="Select Doctor:"/>
+            <ComboBox fx:id="doctorComboBox"/>
+            <Label fx:id="doctorInfoLabel" text="Doctor Information: \nPlease select a doctor."/>
+            <TableView fx:id="availableSlotsTable"/>
+            <Button text="Book Appointment" onAction="#handleBooking"/>
+        </VBox>
+    </center>
+</BorderPane>

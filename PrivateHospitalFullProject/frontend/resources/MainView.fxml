@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <VBox spacing="10" alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+            <Button text="Services" maxWidth="200"/>
+            <Button text="About Us" maxWidth="200"/>
+            <Button text="Contact" maxWidth="200"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <ComboBox fx:id="specialtyBox" promptText="Select Specialty" maxWidth="300"/>
+            <ComboBox fx:id="doctorBox" promptText="Select Doctor" maxWidth="300"/>
+            <TextArea fx:id="doctorDetails" promptText="Doctor Details" maxWidth="300" prefRowCount="4"/>
+            <TableView fx:id="appointmentTable" maxWidth="400">
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Date"/>
+                    <TableColumn fx:id="timeColumn" text="Time"/>
+                </columns>
+            </TableView>
+            <Button text="Book Appointment" onAction="#handleBooking" maxWidth="150"/>
+        </VBox>
+    </center>
+</BorderPane>

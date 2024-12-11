@@ -1,0 +1,16 @@
+com\magan_korhaz\private_hospital\controller\PatientController.class
+com\magan_korhaz\private_hospital\repository\AppointmentRepository.class
+com\magan_korhaz\private_hospital\entity\Doctor.class
+com\magan_korhaz\private_hospital\MainApp.class
+com\magan_korhaz\private_hospital\controller\AppointmentController.class
+com\magan_korhaz\private_hospital\repository\PatientRepository.class
+com\magan_korhaz\private_hospital\controller\DoctorController.class
+com\magan_korhaz\private_hospital\repository\DoctorRepository.class
+com\magan_korhaz\private_hospital\HospitalApp.class
+com\magan_korhaz\private_hospital\RegisterController.class
+org\example\Main.class
+com\magan_korhaz\private_hospital\PrivateHospitalApplication.class
+com\magan_korhaz\private_hospital\LoginController.class
+com\magan_korhaz\private_hospital\MainController.class
+com\magan_korhaz\private_hospital\entity\Appointment.class
+com\magan_korhaz\private_hospital\entity\Patient.class
