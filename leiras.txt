@@ -1,0 +1,7 @@
+Frontend futtatásánál jelentkező hibák:
+Error: JavaFX runtime components are missing, and are required to run this application
+
+Error occurred during initialization of boot layer
+java.lang.module.FindException: Module javafx.controls not found
+
+Megoldás:
