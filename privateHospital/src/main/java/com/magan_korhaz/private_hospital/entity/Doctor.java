@@ -19,7 +19,7 @@ public class Doctor {
     @Column(nullable = false)
     private int experience;
 
-    // Getters és Setters
+    // Getters és Setters:
     public Long getId() {
         return id;
     }
