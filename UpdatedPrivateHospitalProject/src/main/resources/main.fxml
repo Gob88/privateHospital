@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
-
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.magan_korhaz.private_hospital.MainController">
-    <top>
-        <ComboBox fx:id="doctorBox" promptText="Válasszon orvost" BorderPane.alignment="CENTER" />
-    </top>
-    <center>
-        <TableView fx:id="appointmentTable">
-            <columns>
-                <TableColumn fx:id="dateColumn" text="Dátum" />
-                <TableColumn fx:id="timeColumn" text="Időpont" />
-            </columns>
-        </TableView>
-    </center>
-    <bottom>
-        <Button text="Időpontok betöltése" onAction="#loadAppointments" BorderPane.alignment="CENTER" />
-    </bottom>
-</BorderPane>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.magan_korhaz.private_hospital.MainController" style="-fx-background-color: lightblue;">
+<VBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #e6e6e6;" prefWidth="200">
+    <Button fx:id="homeButton" text="Kezdőlap" />
+    <Button fx:id="aboutButton" text="Rólunk" />
+    <Button fx:id="servicesButton" text="Szolgáltatásaink" />
+    <Button fx:id="contactButton" text="Kapcsolat" />
+</VBox>
+<VBox fx:id="centerContent" spacing="10" alignment="CENTER" layoutX="210" layoutY="10" style="-fx-background-color: lightblue;">
+    <Label text="Válasszon szakterületet:" />
+    <ComboBox fx:id="specializationComboBox" />
+    <Label text="Válasszon orvost:" />
+    <ListView fx:id="doctorListView" />
+    <ImageView fx:id="doctorImage" fitWidth="150" preserveRatio="true" />
+</VBox>
+</AnchorPane>

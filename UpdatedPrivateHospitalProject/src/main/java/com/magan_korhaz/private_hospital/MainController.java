@@ -1,81 +1,115 @@
-
 package com.magan_korhaz.private_hospital;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainController {
 
     @FXML
-    private BorderPane mainPane;
+    private ComboBox<String> specializationComboBox;
 
     @FXML
-    private ComboBox<String> doctorBox;
+    private ListView<String> doctorListView;
 
     @FXML
-    private TableView<Appointment> appointmentTable;
+    private ImageView doctorImage;
+
+    private Map<String, Map<String, String>> specializationDoctorMap;
 
     @FXML
-    private TableColumn<Appointment, String> dateColumn;
+    private void initialize() {
+        // Initialize specialization and doctor map
+        initializeSpecializationsAndDoctors();
 
-    @FXML
-    private TableColumn<Appointment, String> timeColumn;
+        // Populate the specialization combo box
+        specializationComboBox.getItems().addAll("Kardiológia", "Neurológia", "Ortopédia", "Bőrgyógyászat", "Fogászat", "Onkológia", "Pszichológia");
 
-    @FXML
-    public void initialize() {
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        doctorBox.getItems().addAll("Dr. Kovács Béla", "Dr. Nagy Anna", "Dr. Tóth István");
+        // Add a listener to load doctors based on the selected specialization
+        specializationComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                loadDoctorsForSpecialization(newValue);
+            }
+        });
+
+        // Add a listener to display the doctor image based on the selected doctor
+        doctorListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                updateDoctorImage(newValue);
+            }
+        });
     }
 
-    @FXML
-    private void showServices() {
-        loadView("services.fxml");
+    private void initializeSpecializationsAndDoctors() {
+        specializationDoctorMap = new HashMap<>();
+
+        // Kardiológia
+        Map<String, String> cardiologyDoctors = new HashMap<>();
+        cardiologyDoctors.put("Dr. Kovács Béla", "dr_kovacs_bela.png");
+        cardiologyDoctors.put("Dr. Nagy Anna", "dr_nagy_anna.png");
+        specializationDoctorMap.put("Kardiológia", cardiologyDoctors);
+
+        // Neurológia
+        Map<String, String> neurologyDoctors = new HashMap<>();
+        neurologyDoctors.put("Dr. Tóth Márk", "dr_toth_mark.png");
+        neurologyDoctors.put("Dr. Varga Petra", "dr_varga_petra.png");
+        specializationDoctorMap.put("Neurológia", neurologyDoctors);
+
+        // Ortopédia
+        Map<String, String> orthopedicsDoctors = new HashMap<>();
+        orthopedicsDoctors.put("Dr. Szabó László", "dr_szabo_laszlo.png");
+        orthopedicsDoctors.put("Dr. Kiss Júlia", "dr_kiss_julia.png");
+        specializationDoctorMap.put("Ortopédia", orthopedicsDoctors);
+
+        // Bőrgyógyászat
+        Map<String, String> dermatologyDoctors = new HashMap<>();
+        dermatologyDoctors.put("Dr. Németh Gábor", "dr_nemeth_gabor.png");
+        dermatologyDoctors.put("Dr. Papp Emese", "dr_papp_emese.png");
+        specializationDoctorMap.put("Bőrgyógyászat", dermatologyDoctors);
+
+        // Fogászat
+        Map<String, String> dentistryDoctors = new HashMap<>();
+        dentistryDoctors.put("Dr. Horváth Tamás", "dr_horvath_tamas.png");
+        dentistryDoctors.put("Dr. Molnár Éva", "dr_molnar_eva.png");
+        specializationDoctorMap.put("Fogászat", dentistryDoctors);
+
+        // Onkológia
+        Map<String, String> oncologyDoctors = new HashMap<>();
+        oncologyDoctors.put("Dr. Balogh Dávid", "dr_balogh_david.png");
+        oncologyDoctors.put("Dr. Farkas Katalin", "dr_farkas_katalin.png");
+        specializationDoctorMap.put("Onkológia", oncologyDoctors);
+
+        // Pszichológia
+        Map<String, String> psychologyDoctors = new HashMap<>();
+        psychologyDoctors.put("Dr. Lukács Zoltán", "dr_lukacs_zoltan.png");
+        psychologyDoctors.put("Dr. Juhász Nóra", "dr_juhasz_nora.png");
+        specializationDoctorMap.put("Pszichológia", psychologyDoctors);
     }
 
-    @FXML
-    private void showAbout() {
-        loadView("about.fxml");
-    }
-
-    @FXML
-    private void showContact() {
-        loadView("contact.fxml");
-    }
-
-    @FXML
-    private void loadAppointments() {
-        String selectedDoctor = doctorBox.getSelectionModel().getSelectedItem();
-        if (selectedDoctor != null) {
-            appointmentTable.getItems().clear();
-            appointmentTable.getItems().addAll(generateRandomAppointments());
+    private void loadDoctorsForSpecialization(String specialization) {
+        doctorListView.getItems().clear();
+        Map<String, String> doctors = specializationDoctorMap.get(specialization);
+        if (doctors != null) {
+            doctorListView.getItems().addAll(doctors.keySet());
         }
     }
 
-    private List<Appointment> generateRandomAppointments() {
-        Random random = new Random();
-        return IntStream.range(1, 6)
-            .mapToObj(i -> new Appointment("2023-12-" + (random.nextInt(30) + 1), random.nextInt(12) + 8 + ":00"))
-            .collect(Collectors.toList());
-    }
-
-    private void loadView(String fxmlFile) {
-        try {
-            Parent view = FXMLLoader.load(getClass().getResource("/" + fxmlFile));
-            mainPane.setCenter(view);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void updateDoctorImage(String doctorName) {
+        for (Map<String, String> doctors : specializationDoctorMap.values()) {
+            if (doctors.containsKey(doctorName)) {
+                String imageName = doctors.get(doctorName);
+                try {
+                    Image doctorImageObj = new Image(getClass().getResourceAsStream("/images/" + imageName));
+                    doctorImage.setImage(doctorImageObj);
+                } catch (Exception e) {
+                    System.err.println("Failed to load image: " + imageName);
+                }
+                break;
+            }
         }
     }
 }
